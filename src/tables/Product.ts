@@ -47,4 +47,18 @@ export interface IProduct {
     price: number;
     sellerId: number;
     stock: number;
+    category: Category;
+}
+
+export enum Category { 
+    Electronics = "electronics",
+    Clothing = "clothing",
+    Home = "home",
+    Books = "books",
+    Toys = "toys",
+    Sports = "sports",
+    Beauty = "beauty",
+    Automotive = "automotive",
+    Grocery = "grocery",
+    Health = "health",
 }
