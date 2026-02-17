@@ -1,5 +1,6 @@
-import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { Model, Table, Column, DataType, HasMany, BelongsTo } from "sequelize-typescript";
 import { Message } from "./Message";
+import { BuysAndReviews } from "./Buys&Reviews";
 
 @Table
 export class User extends Model<User, IUser> {
@@ -71,6 +72,22 @@ export class User extends Model<User, IUser> {
     })
     declare messages: Message[];
 
+    @HasMany(()=> Message, {
+        foreignKey: "senderId"
+    })
+    declare sentMessages: Message[];
+
+    @BelongsTo(()=> Message, {
+        foreignKey: "receiverId"
+    })
+    declare receivedMessages: Message[];
+
+    @BelongsTo(()=>BuysAndReviews,{
+        foreignKey: "userId"
+    })
+    declare buysAndReviews: BuysAndReviews;
+
+    
 }
 
 export interface IUser {
@@ -91,4 +108,5 @@ export enum AccountType {
     Buyer = "buyer",
     Seller = "seller",
 }
+
 

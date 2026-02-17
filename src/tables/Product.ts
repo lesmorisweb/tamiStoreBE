@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
+import { Car } from "./Car";
 
 @Table
 export class Product extends Model<Product, IProduct> {
@@ -56,6 +57,11 @@ export class Product extends Model<Product, IProduct> {
         allowNull: false,
     })
     declare like: boolean;
+
+    @BelongsTo(()=> Car, {
+        foreignKey: "carId",
+    })
+    declare car: Car;
 }
 
 export interface IProduct {

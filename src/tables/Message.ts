@@ -1,4 +1,4 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
 import { User } from "./User";
 
 
@@ -9,14 +9,22 @@ export class Message extends Model<Message, IMessage> {
     @Column({
         type: DataType.INTEGER,
         allowNull: false,
+        references: {
+            model: User,
+            key: "id",
+        },
     })
-    declare senderId: User["id"];
+    declare senderId: number;
 
     @Column({
         type: DataType.INTEGER,
         allowNull: false,
+        references: {
+            model: User,
+            key: "id",
+        },
     })
-    declare receiverId: User["id"];
+    declare receiverId: number;
 
     @Column({
         type: DataType.STRING,
@@ -36,12 +44,21 @@ export class Message extends Model<Message, IMessage> {
     })
     declare readded: boolean;
 
+    @BelongsTo(() => User, {
+        foreignKey: "senderId",
+    })
+    declare sender: User;
+
+    @BelongsTo(() => User, {
+        foreignKey: "receiverId",
+    })
+    declare receiver: User;
 }
 
 
 export type IMessage = {
-    senderId: User["id"];
-    receiverId: User["id"];
+    senderId: number;
+    receiverId: number;
     content: string;
     timestamp: Date;
     readded: boolean;

@@ -1,4 +1,4 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Product } from "./Product";
 
 
@@ -41,6 +41,12 @@ export class BuysAndReviews extends Model<BuysAndReviews, IBuysAndReviews> {
         allowNull: false,
     })
     declare carNumber: number;
+
+    @HasMany(() => Product, {
+        foreignKey: "productId",
+    })
+    declare product: Product[];
+    
 
 }
 

@@ -1,17 +1,17 @@
-import { Column, DataType, Model, Table, } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table, } from "sequelize-typescript";
 import { Product } from "./Product";
 
 
 @Table
 
-export class BuysAndReviews extends Model<BuysAndReviews, IBuysAndReviews> {
+export class Car extends Model<Car, ICar> {
 
     @Column({
         type: DataType.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     })
-    declare id: number;
+    declare carId: number;
 
     @Column({
         type: DataType.INTEGER,
@@ -36,10 +36,15 @@ export class BuysAndReviews extends Model<BuysAndReviews, IBuysAndReviews> {
         allowNull: false,
     })
     declare amountToBuy: number;
+
+    @HasMany(() => Product, {
+        foreignKey: "productId",
+    })
+    declare product: Product[];
 }
 
-export interface IBuysAndReviews {
-    id: number;
+export interface ICar {
+    carId: number;
     userId: number;
     carName: string;
     products: Product[];
