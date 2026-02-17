@@ -46,6 +46,18 @@ export class User extends Model<User, IUser> {
     })
     declare accountType: AccountType;
 
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    declare credits: number;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    declare cuppons: string[];
+
 }
 
 export interface IUser {
@@ -56,6 +68,8 @@ export interface IUser {
     address: string[];
     phone: string;
     accountType: AccountType;
+    credits: number;
+    cuppons: string[];
 }
 
 export type AccountType = "buyer" | "seller";
