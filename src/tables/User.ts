@@ -32,6 +32,12 @@ export class User extends Model<User, IUser> {
         type: DataType.STRING,
         allowNull: false,
     })
+    declare address: string[];
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
     declare phone: string;
 
     @Column({
@@ -47,6 +53,7 @@ export interface IUser {
     name: string;
     email: string;
     country: string;
+    address: string[];
     phone: string;
     accountType: AccountType;
 }
