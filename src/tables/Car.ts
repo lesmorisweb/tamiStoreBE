@@ -30,6 +30,12 @@ export class BuysAndReviews extends Model<BuysAndReviews, IBuysAndReviews> {
         allowNull: false,
     })
     declare products: Product[];
+
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    declare amountToBuy: number;
 }
 
 export interface IBuysAndReviews {
@@ -37,4 +43,5 @@ export interface IBuysAndReviews {
     userId: number;
     carName: string;
     products: Product[];
+    amountToBuy: number;
 }
