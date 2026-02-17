@@ -44,6 +44,18 @@ export class Product extends Model<Product, IProduct> {
         allowNull: false,
     })
     declare stock: number;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    declare category: Category;
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+    })
+    declare like: boolean;
 }
 
 export interface IProduct {
@@ -55,6 +67,7 @@ export interface IProduct {
     sellerId: number;
     stock: number;
     category: Category;
+    like: boolean;
 }
 
 export enum Category { 
