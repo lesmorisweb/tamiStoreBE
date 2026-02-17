@@ -59,6 +59,18 @@ export class User extends Model<User, IUser> {
     })
     declare cuppons: string[];
 
+    @Column({
+        type: DataType.JSON,
+        allowNull: false,
+    })
+    declare friends: User[];
+
+    @Column({
+        type: DataType.JSON,
+        allowNull: false,
+    })
+    declare messages: Message[];
+
 }
 
 export interface IUser {
