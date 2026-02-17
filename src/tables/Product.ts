@@ -19,6 +19,12 @@ export class Product extends Model<Product, IProduct> {
         type: DataType.STRING,
         allowNull: false,
     })
+    declare image: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
     declare description: string;
 
     @Column({
@@ -43,6 +49,7 @@ export class Product extends Model<Product, IProduct> {
 export interface IProduct {
     id: number;
     name: string;
+    image: string;
     description: string;
     price: number;
     sellerId: number;
