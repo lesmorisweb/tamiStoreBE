@@ -1,4 +1,5 @@
 import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { Message } from "./Message";
 
 @Table
 export class User extends Model<User, IUser> {
@@ -70,6 +71,12 @@ export interface IUser {
     accountType: AccountType;
     credits: number;
     cuppons: string[];
+    friends: User[];
+    messages: Message[];
 }
 
-export type AccountType = "buyer" | "seller";
+export enum AccountType {
+    Buyer = "buyer",
+    Seller = "seller",
+}
+
