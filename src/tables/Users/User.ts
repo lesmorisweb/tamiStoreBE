@@ -1,6 +1,6 @@
 import { Model, Table, Column, DataType, HasMany, BelongsTo } from "sequelize-typescript";
-import { Message } from "./Message";
-import { BuysAndReviews } from "./Buys&Reviews";
+import { Message } from "../Message";
+import { BuysAndReviews } from "../Buys&Reviews";
 
 @Table
 export class User extends Model<User, IUser> {
@@ -49,18 +49,6 @@ export class User extends Model<User, IUser> {
     declare accountType: AccountType;
 
     @Column({
-        type: DataType.INTEGER,
-        allowNull: false,
-    })
-    declare credits: number;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    declare cuppons: string[];
-
-    @Column({
         type: DataType.JSON,
         allowNull: false,
     })
@@ -91,15 +79,13 @@ export class User extends Model<User, IUser> {
 }
 
 export interface IUser {
-    id: number;
+    userId: number;
     name: string;
     email: string;
     country: string;
     address: string[];
     phone: string;
     accountType: AccountType;
-    credits: number;
-    cuppons: string[];
     friends: User[];
     messages: Message[];
 }

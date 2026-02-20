@@ -1,5 +1,8 @@
-import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Car } from "./Car";
+import { Reviews } from "./Reviews";
+import { User } from "./Users/User";
+import { SellerUser } from "./Users/SellerUser";
 
 @Table
 export class Product extends Model<Product, IProduct> {
@@ -58,10 +61,20 @@ export class Product extends Model<Product, IProduct> {
     })
     declare like: boolean;
 
+    @HasMany(() => Reviews, {
+        foreignKey: "productId",
+    })
+    declare reviews: Reviews[];
+
     @BelongsTo(()=> Car, {
         foreignKey: "carId",
     })
     declare car: Car;
+
+    @BelongsTo(()=> SellerUser, {
+        foreignKey: "sellerId",
+    })
+    declare seller: SellerUser;
 }
 
 export interface IProduct {
@@ -74,6 +87,7 @@ export interface IProduct {
     stock: number;
     category: Category;
     like: boolean;
+    review: string[];
 }
 
 export enum Category { 

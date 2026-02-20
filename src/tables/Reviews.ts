@@ -1,10 +1,10 @@
-import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
 import { Product } from "./Product";
+import { User } from "./Users/User";
 
 
 @Table
-
-export class BuysAndReviews extends Model<BuysAndReviews, IBuysAndReviews> {
+export class Reviews extends Model<Reviews, IReviews> {
     @Column({
         type: DataType.INTEGER,
         primaryKey: true,
@@ -16,7 +16,7 @@ export class BuysAndReviews extends Model<BuysAndReviews, IBuysAndReviews> {
         type: DataType.INTEGER,
         allowNull: false,
     })
-    declare userId: number;
+    declare userId: number; 
 
     @Column({
         type: DataType.DATE,
@@ -28,27 +28,30 @@ export class BuysAndReviews extends Model<BuysAndReviews, IBuysAndReviews> {
         type: DataType.JSON,
         allowNull: false,
     })
-    declare products: Product[];
+    declare products: Product;
 
     @Column({
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull: false,
     })
-    declare carNumber: number;
+    declare review: string[];
 
-    @HasMany(() => Product, {
+    @BelongsTo(() => User, {
+        foreignKey: "userId",
+    })
+    declare user: User;
+
+    @BelongsTo(() => Product, {
         foreignKey: "productId",
     })
-    declare product: Product[];
-    
+    declare product: Product;
 
 }
 
-export interface IBuysAndReviews {
+export interface IReviews {
     id: number;
     userId: number;
     date: Date;
-    products: Product[];
+    products: Product;
     review: string[];
-    carNumber: number;
 }

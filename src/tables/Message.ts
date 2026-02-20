@@ -1,5 +1,5 @@
 import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
-import { User } from "./User";
+import { User } from "./Users/User";
 
 
 @Table
@@ -53,6 +53,7 @@ export class Message extends Model<Message, IMessage> {
         foreignKey: "receiverId",
     })
     declare receiver: User;
+
 }
 
 

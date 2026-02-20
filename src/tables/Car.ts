@@ -1,5 +1,6 @@
-import { Column, DataType, HasMany, Model, Table, } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, HasMany, Model, Table, } from "sequelize-typescript";
 import { Product } from "./Product";
+import { User } from "./Users/User";
 
 
 @Table
@@ -41,6 +42,11 @@ export class Car extends Model<Car, ICar> {
         foreignKey: "productId",
     })
     declare product: Product[];
+
+    @BelongsTo(()=> User, {
+        foreignKey: "userId",
+    })
+    declare user: User;
 }
 
 export interface ICar {
