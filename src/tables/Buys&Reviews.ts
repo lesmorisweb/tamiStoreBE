@@ -1,5 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Product } from "./Product";
+import { Reviews } from "./Reviews";
 
 
 @Table
@@ -49,6 +50,6 @@ export interface IBuysAndReviews {
     userId: number;
     date: Date;
     products: Product[];
-    review: string[];
+    review: Reviews[];
     carNumber: number;
 }

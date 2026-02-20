@@ -8,6 +8,13 @@ export class Message extends Model<Message, IMessage> {
 
     @Column({
         type: DataType.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    })
+    declare messageId: number;
+
+    @Column({
+        type: DataType.INTEGER,
         allowNull: false,
         references: {
             model: User,
@@ -58,8 +65,9 @@ export class Message extends Model<Message, IMessage> {
 
 
 export type IMessage = {
-    senderId: number;
-    receiverId: number;
+    messageId: number;
+    senderId: User["id"];
+    receiverId: User["id"];
     content: string;
     timestamp: Date;
     readded: boolean;
